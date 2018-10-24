@@ -1,0 +1,2 @@
+#!/bin/bash
+cat ../src/test/resources/spreadsheet.txt | java -jar ../target/spreadsheet-calculator-0.0.1-SNAPSHOT.jar 
