@@ -8,6 +8,7 @@ import java.util.StringTokenizer;
 
 import com.sample.application.calculator.domain.Cell;
 import com.sample.application.calculator.exceptions.InvalidInputException;
+import com.sample.application.calculator.utils.SpreadsheetConstants;
 import com.sample.application.calculator.utils.SpreadsheetUtils;
 
 /**
@@ -60,7 +61,7 @@ public class CellValueCalculator {
 	 * @throws InvalidInputException
 	 */
 	private void runCycleDependencyCheck(String token, String refCellVal) throws InvalidInputException {
-		StringTokenizer refCellValTokens = new StringTokenizer(refCellVal, " ");
+		StringTokenizer refCellValTokens = new StringTokenizer(refCellVal, SpreadsheetConstants.DELIMITER);
 		while (refCellValTokens.hasMoreTokens()) {
 			String refCellToken = refCellValTokens.nextToken();
 			if (SpreadsheetUtils.isCellHoldingReferenceToOtherCell(refCellToken)) {

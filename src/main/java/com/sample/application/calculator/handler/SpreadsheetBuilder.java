@@ -1,14 +1,16 @@
 /**
  * 
  */
-package com.sample.application.calculator;
+package com.sample.application.calculator.handler;
 
 import java.io.InputStream;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 import java.util.StringTokenizer;
 
 import com.sample.application.calculator.domain.Cell;
 import com.sample.application.calculator.exceptions.InvalidInputException;
+import com.sample.application.calculator.utils.SpreadsheetConstants;
 import com.sample.application.calculator.validators.DimensionsValidator;
 
 /**
@@ -57,7 +59,6 @@ public class SpreadsheetBuilder {
 			} else {
 				column = 0;
 				row++;
-				continue;
 			}
 		}
 		scanner.close();
@@ -66,9 +67,13 @@ public class SpreadsheetBuilder {
 
 	private Cell[][] initializeSpreadSheet(String line) throws InvalidInputException {
 		new DimensionsValidator().validate(line);
-		StringTokenizer tokens = new StringTokenizer(line, " ");
-		int columns = Integer.parseInt(tokens.nextToken());
-		int rows = Integer.parseInt(tokens.nextToken());
-		return new Cell[rows][columns];
+		try {
+			StringTokenizer tokens = new StringTokenizer(line, SpreadsheetConstants.DELIMITER);
+			int columns = Integer.parseInt(tokens.nextToken());
+			int rows = Integer.parseInt(tokens.nextToken());
+			return new Cell[rows][columns];
+		} catch (NoSuchElementException e) {
+			throw new InvalidInputException(e.getMessage());
+		}
 	}
 }

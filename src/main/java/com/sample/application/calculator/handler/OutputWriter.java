@@ -8,6 +8,7 @@ import java.io.PrintStream;
 import java.util.stream.Stream;
 
 import com.sample.application.calculator.domain.Cell;
+import com.sample.application.calculator.utils.SpreadsheetConstants;
 
 /**
  * @author sidonepudi
@@ -23,8 +24,10 @@ public class OutputWriter {
 
 	public void printOutput(Cell[][] spreadSheet) {
 		if (outputStream instanceof PrintStream) {
-			Stream.of(spreadSheet).forEach(row -> Stream.of(row)
-					.forEach(cell -> ((PrintStream) outputStream).printf("%.5f%n", cell.getValue())));
+			PrintStream out = ((PrintStream) outputStream);
+			out.println(spreadSheet[0].length + SpreadsheetConstants.DELIMITER + spreadSheet.length);
+			Stream.of(spreadSheet)
+					.forEach(row -> Stream.of(row).forEach(cell -> out.printf("%.5f%n", cell.getValue())));
 		}
 	}
 }

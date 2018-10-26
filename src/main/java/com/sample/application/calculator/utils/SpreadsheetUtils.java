@@ -19,7 +19,7 @@ public class SpreadsheetUtils {
 	}
 
 	public static String[] getTokens(String input) {
-		StringTokenizer tokens = new StringTokenizer(input, " ");
+		StringTokenizer tokens = new StringTokenizer(input, SpreadsheetConstants.DELIMITER);
 		String[] tokenArray = new String[tokens.countTokens()];
 
 		int i = 0;

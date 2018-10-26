@@ -6,6 +6,7 @@ package com.sample.application.calculator.validators;
 import java.util.StringTokenizer;
 
 import com.sample.application.calculator.exceptions.InvalidInputException;
+import com.sample.application.calculator.utils.SpreadsheetConstants;
 
 /**
  * Validator for the spreadsheet dimensions
@@ -16,7 +17,7 @@ import com.sample.application.calculator.exceptions.InvalidInputException;
 public class DimensionsValidator {
 
 	public void validate(String line) throws InvalidInputException {
-		StringTokenizer tokens = new StringTokenizer(line, " ");
+		StringTokenizer tokens = new StringTokenizer(line, SpreadsheetConstants.DELIMITER);
 		int rows = -1;
 		int columns = -1;
 		try {
